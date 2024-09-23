@@ -1,0 +1,7 @@
+### GET to local API 
+GET http://localhost:3000/users
+Content-Type: application/json
+
+###GET for published API 
+GET https://cse341-project-yz86.onrender.com/users
+Content-Type: application/json
