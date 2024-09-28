@@ -5,3 +5,23 @@ Content-Type: application/json
 ###GET for published API 
 GET https://cse341-project-yz86.onrender.com/users
 Content-Type: application/json
+
+### GET user by ID
+GET http://localhost:3000/users/66efb38a229c9cd413a23106
+Content-Type: application/json
+
+### Create Contact
+POST  http://localhost:3000/users HTTP/1.1
+content-Type: application/json
+
+{
+    "firstName":"Anne",
+    "lastName": "Teixeira",
+    "email": "anne@example.com",
+    "favoriteColor": "Blue",
+    "birthday": "1994-10-15"
+}
+
+### PUT contact
+DELETE http://localhost:3000/users/66f609528c921b7fff73d5ce HTTP/1.1
+
