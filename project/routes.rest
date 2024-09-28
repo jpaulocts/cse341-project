@@ -23,5 +23,20 @@ content-Type: application/json
 }
 
 ### PUT contact
+PUT http://localhost:3000/users/66efb38a229c9cd413a23106 HTTP/1.1
+content-Content-Type: : application/jason
+
+{
+
+"firstName":"Paulo",
+    "lastName": "Cauas",
+    "email": "paulo@example.com",
+    "favoriteColor": "Blue",
+    "birthday": "1991-01-04"
+
+}
+
+
+### DELETE contact
 DELETE http://localhost:3000/users/66f609528c921b7fff73d5ce HTTP/1.1
 
