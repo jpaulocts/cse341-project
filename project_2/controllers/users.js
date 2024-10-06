@@ -3,14 +3,16 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req,res) => {
     //#swagger.tags = ['Users']
-    const result = await mongodb.getDatabase().db().collection('users').find()
-    result.toArray((err, users) => {
-        if (err) {
-            res.status(400).json({message:err})
-        }
-        res.setHeader('Content-Type', 'application/json')
-        res.status(200).json(users);
-    })
+    try {
+        const result = await mongodb.getDatabase().db().collection('users').find().toArray(); // Converter o cursor em um array
+        console.log("Users from DB:", result); // Exibir os usuários no console
+
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(result); 
+    } catch (err) {
+        console.error("Error retrieving users:", err); 
+        res.status(400).json({ message: err.message });
+    }
 }
 
 const getSingle = async (req,res) => {
@@ -18,15 +20,21 @@ const getSingle = async (req,res) => {
     if(!ObjectId.isValid(req.params.id)) {
         res.status(400).json('Must use a valid contact if to find a contact')
     }
-    const userId = new ObjectId(req.params.id)
-    const result = await mongodb.getDatabase().db().collection('users').find({_id: userId})
-    result.toArray((err, user) => {
-        if (err) {
-            res.status(400).json({message:err})
+    const userId = new ObjectId(req.params.id);
+
+    try {
+        const result = await mongodb.getDatabase().db().collection('users').findOne({ _id: userId });
+        
+        if (!result) {
+            return res.status(404).json({ message: "User not found" }); 
         }
-        res.setHeader('Content-Type', 'application/json')
-        res.status(200).json(user);
-    })
+
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(result); 
+    } catch (err) {
+        console.error("Error retrieving user:", err); 
+        res.status(400).json({ message: err.message }); 
+    }
 }
 
 const createUser = async(req,res) => {

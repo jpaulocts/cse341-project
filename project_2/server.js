@@ -4,8 +4,8 @@ const port = process.env.PORT || 3000;
 const router = require('./routes/routes')
 const mongoDb = require('./data/database')
 const bodyParser = require('body-parser')
-const swaggerUi = require('swagger-ui-express')
-const swaggerDocument = require('./swagger.json')
+const dotenv = require('dotenv');
+dotenv.config();
 
 
 app.use(bodyParser.json())
