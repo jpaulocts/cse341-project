@@ -83,7 +83,16 @@
                   "example": "any"
                 },
                 "location": {
-                  "example": "any"
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "example": "any"
+                    },
+                    "country": {
+                      "example": "any"
+                    }
+                  }
+                  
                 }
               }
             }
