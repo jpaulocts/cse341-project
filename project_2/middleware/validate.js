@@ -15,19 +15,6 @@ const userValidationRules = () => {
         .bail()
         .isObject()
         .withMessage('Location must be an object')
-        .custom(value => {
-            if (!value.city || !value.country) {
-                throw new Error('Both city and country are required in location');
-            }
-            return true;
-        })
-        .bail()
-        .custom(value => {
-            if (typeof value.city !== 'string' || typeof value.country !== 'string') {
-                throw new Error('City and country must be strings');
-            }
-            return true;
-        })
     ];
 };
 
@@ -36,6 +23,7 @@ const validate = (req, res, next) => {
     if(errors.isEmpty()) {
         return next()
     }
+    console.error(errors)
     const extractedErrors = []
     errors.array().map(err => extractedErrors.push({[err.param]: err.msg}))
     return res.status(412).json({
