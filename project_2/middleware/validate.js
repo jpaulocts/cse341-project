@@ -6,7 +6,7 @@ const userValidationRules = () => {
         check('registration_date').isISO8601().withMessage('Registration date must be a valid date'),
         check('age').isInt({ min: 1 }).withMessage('Age must be a positive integer'),
         check('is_active').isBoolean().withMessage('Is active must be a boolean'),
-        check('hobbies').isArray().withMessage('Hobbies must be an array'),
+        check('hobbies').notEmpty().withMessage('Hobbies must be an array'),
         check('location.city').notEmpty().withMessage('City is required'),
         check('location.country').notEmpty().withMessage('Country is required'),
         check('location')
