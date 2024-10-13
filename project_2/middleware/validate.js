@@ -18,6 +18,30 @@ const userValidationRules = () => {
     ];
 };
 
+
+const teamValidationRules = () => {
+
+    return [
+        check('name')
+            .notEmpty().withMessage('Name is required')
+            .isString().withMessage('Name must be a string'),
+        check('country')
+            .notEmpty().withMessage('Country is required')
+            .isString().withMessage('Country must be a string'),
+        check('founded')
+            .notEmpty().withMessage('Fountadtion is required')
+            .isInt({min: 1800, max: new Date().getFullYear() }).withMessage('The year must be a valid number between 1800 e today year'),
+        check('stadium')
+            .notEmpty().withMessage('Stadium is required')
+            .isString().withMessage('Stadium must be a string'),
+        check('league')
+            .notEmpty().withMessage('League is required')
+            .isString().withMessage('League must be a string')
+
+    ];
+
+}
+
 const validate = (req, res, next) => {
     const errors = validationResult(req)
     if(errors.isEmpty()) {
@@ -33,7 +57,9 @@ const validate = (req, res, next) => {
     })
 }
 
+
 module.exports = {
     userValidationRules,
+    teamValidationRules,
     validate
 }
